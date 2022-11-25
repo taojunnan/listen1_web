@@ -1,7 +1,7 @@
 # Listen 1 (Web)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
 
-[English Version](./README_EN.md)
+中文 | [English](./README_EN.md)
 
 fork from [listen1/listen1_chrome_extension](https://github.com/listen1/listen1_chrome_extension)  
 [`listen1 chrome扩展版本`](https://github.com/listen1/listen1_chrome_extension)的web版，不保证所有功能都能正常使用。
@@ -15,7 +15,7 @@ fork from [listen1/listen1_chrome_extension](https://github.com/listen1/listen1_
 - [x] 网易云音乐
 - [x] QQ 音乐
 - [x] 酷狗音乐
-- [ ] 酷我音乐
+- [x] 酷我音乐
 - [ ] bilibili
 - [ ] 咪咕音乐
 - [ ] 千千音乐
@@ -80,6 +80,33 @@ fork from [listen1/listen1_chrome_extension](https://github.com/listen1/listen1_
   location ^~/kugouapi/ {
     proxy_pass   https://wwwapi.kugou.com/;
     proxy_set_header Referer "https://www.kugou.com/";
+  }
+
+  # 酷我音乐
+  location ^~/kuwo/ {
+    proxy_pass   https://www.kuwo.cn/;
+    proxy_set_header Referer "https://www.kuwo.cn/";
+    proxy_set_header Origin "https://www.kuwo.cn/";
+  }
+  
+  location ^~/kuwoanti/ {
+    proxy_pass   https://antiserver.kuwo.cn/;
+    proxy_set_header Referer "https://www.kuwo.cn/";
+  }
+  
+  location ^~/kuwom/ {
+    proxy_pass   https://m.kuwo.cn/;
+    proxy_set_header Referer "https://www.kuwo.cn/";
+  }
+  
+  location ^~/kuwosearch/ {
+    proxy_pass   https://search.kuwo.cn/;
+    proxy_set_header Referer "https://www.kuwo.cn/";
+  }
+  
+  location ^~/kuwonpl/ {
+    proxy_pass   https://nplserver.kuwo.cn/;
+    proxy_set_header Referer "https://www.kuwo.cn/";
   }
 ```
 

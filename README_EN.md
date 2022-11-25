@@ -1,7 +1,7 @@
 # Listen 1 (Web)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
 
-[中文](./README.md)
+[中文](./README.md) | English
 
 fork from [listen1/listen1_chrome_extension](https://github.com/listen1/listen1_chrome_extension)  
 Web version for [`listen1 chrome extension`](https://github.com/listen1/listen1_chrome_extension)
@@ -13,7 +13,7 @@ now you can use
 - [x] Netease
 - [x] QQ
 - [x] Kugou
-- [ ] Kuwo
+- [x] Kuwo
 - [ ] Bilibili
 - [ ] Migu
 - [ ] Qianqian (taihe)
@@ -78,6 +78,33 @@ set up an nginx reverse proxy, like this:
   location ^~/kugouapi/ {
     proxy_pass   https://wwwapi.kugou.com/;
     proxy_set_header Referer "https://www.kugou.com/";
+  }
+
+  # Kuwo
+  location ^~/kuwo/ {
+    proxy_pass   https://www.kuwo.cn/;
+    proxy_set_header Referer "https://www.kuwo.cn/";
+    proxy_set_header Origin "https://www.kuwo.cn/";
+  }
+  
+  location ^~/kuwoanti/ {
+    proxy_pass   https://antiserver.kuwo.cn/;
+    proxy_set_header Referer "https://www.kuwo.cn/";
+  }
+  
+  location ^~/kuwom/ {
+    proxy_pass   https://m.kuwo.cn/;
+    proxy_set_header Referer "https://www.kuwo.cn/";
+  }
+  
+  location ^~/kuwosearch/ {
+    proxy_pass   https://search.kuwo.cn/;
+    proxy_set_header Referer "https://www.kuwo.cn/";
+  }
+  
+  location ^~/kuwonpl/ {
+    proxy_pass   https://nplserver.kuwo.cn/;
+    proxy_set_header Referer "https://www.kuwo.cn/";
   }
 ```
 
