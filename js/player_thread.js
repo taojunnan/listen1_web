@@ -538,7 +538,7 @@
     }
 
     setMediaURI(uri, url) {
-      console.log('setMediaURI', uri, url);
+      // console.log('setMediaURI', uri, url);
       if (url) {
         this._media_uri_list[url] = uri;
       }
