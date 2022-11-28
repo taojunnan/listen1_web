@@ -67,14 +67,32 @@ class kugou {
     const keyword = getParameterByName('keywords', url);
     const curpage = getParameterByName('curpage', url);
     const searchType = getParameterByName('type', url);
+
     if (searchType === '1') {
       return {
-        success: (fn) =>
-          fn({
-            result: [],
-            total: 0,
-            type: searchType,
-          }),
+        success: (fn) => {
+        const target_url = `${kugouMobileUrl}/api/v3/search/special?keyword=${keyword}&pagesize=20&filter=0&page=${curpage}`;
+
+        axios.get(target_url)
+          .then((response) => {
+            const result = response.data.data.info.map((item) => ({
+              id: `kgplaylist_${item.specialid}`,
+              title: item.specialname,
+              source: 'kugou',
+              source_url: `${kugouBaseUrl}/yy/special/single/${item.specialid}.html`,
+              img_url: item.imgurl ? item.imgurl.replace('{size}', '400') : '',
+              url: `kgplaylist_${item.specialid}`,
+              author: item.nickname,
+              count: item.songcount,
+            }));
+
+            const { total } = response.data.data;
+
+            return fn({ result, total, type: searchType });
+          }).catch(() => {
+            fn({ result: [], total: 0, type: searchType });
+          })
+        }
       };
     }
     return {
